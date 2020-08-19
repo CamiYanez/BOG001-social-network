@@ -57,7 +57,7 @@ input::placeholder {
   text-align: center;
 }
 
-.btn-signup, .btn-signin-google {
+.btn-signup, .btn-signin-google, .btn_share {
   padding: 0.7em;
   font-size: 1em;
   margin: 10px 0px;
@@ -81,7 +81,7 @@ span{
   display: none;
 }
 
-/* Style en mobile timeline */
+/* STYLE MOBILE TIMELINE */
 
   #template-timeline{
     background: white;
@@ -91,20 +91,111 @@ span{
   .nav-desktop {
     display:none;
   }
-
+ /* Header */
 header {
   background: #fc4a1a;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #f7b733, #fc4a1a); 
   display: flex;
   justify-content: center;
+  margin-bottom: 1em;
 }
 
 #logo-timeline{
-  width: 30%;
+  width: 50%;
   padding: 0.5em;
 }
+/* MAIN  */
+.timeline{
+  background: white;
+  padding-bottom: 5em;
+  /* height: 50vh; */
+}
 
+
+
+.container-post{
+  background-color: white;
+}
+
+.container-all-posts{
+  margin-bottom: 2em;
+}
+
+.main{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: white;
+}
+
+
+.block-createpost{
+  width: 95%;
+}
+
+.block-createpost__user{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+}
+
+.user-img{
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+}
+
+.user-name{
+  font-weight: bold;
+  font-size: 18px;
+  padding: 2%;
+  text-align: center;
+  text-align: left;
+}
+
+.form-share{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin-top:1em;
+}
+
+.input-share{
+  width:100%;
+  height: 6em;
+  border-radius: 10px;
+  font-family: "Cabin", sans-serif;
+  background-color: #F2F2F2;
+  border: solid 1px rgb(0, 0, 0, 0.37);
+}
+
+.share-options{
+  text-align: right;
+  width: 100%;
+}
+
+.btn_share_img{
+  border:none;
+  text-decoration: none;
+  text-align:center;
+}
+
+.btn_share{
+  padding: 0.7em;
+  font-size: 1em;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: #F37335;
+  width: 50%;
+}
+/* Footer */
 footer ul{
   background: #fc4a1a;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #f86f13, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
@@ -119,11 +210,6 @@ footer ul{
   padding: 0.5em;
 }
 
-
-.timeline{
-  background: white;
-  height: 100vh;
-}
 li{
 
   display: flex;
@@ -141,6 +227,133 @@ li .fa {
 footer p {
   display:none;
 }
+
+/* ESTILO DE LOS POSTS  #########################*/
+
+/*Style para todos los post */
+.individual-post{
+  border: solid 1px rgb(235, 235, 235);
+  padding: 2%;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  margin: 10px 2%;
+  
+}
+
+/* Para destacar los post recién hechos */
+.recently-posted .individual-post{
+  background-color: rgba(255, 230, 0, 0.383);
+}
+
+
+.individual-post span{
+  color: black;
+}
+
+/* Fecha y hora del post  */
+.individual-post h5{
+  padding: 2%;
+  text-align: center;
+}
+
+.individual-post i{
+  /* font-family: "Cabin", sans-serif; */
+  font-size: 30px;
+  align-self: center;
+  opacity: 0.8;
+  margin-left: 0.5em;
+}
+
+.individual-post i:hover{
+  opacity: 1;
+}
+
+.post-text{
+  font-size: 1.5em;
+  padding: 8% 4%;
+  text-align: center;
+}
+
+/* Botones de like y comentar */
+.input-comment__style{
+  background-color: #bdbdbd;
+  padding: 3%;
+  width: 80%;
+  border: none;
+  border-radius: 10px;
+}
+
+.input-comment__style:hover{
+  background-color: #da8f6a;
+}
+
+
+/* Este quedó como el container de el textarea y el boton de enviar */
+.button-post__container{ 
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  
+}
+
+/* iconos de like y comentar con texto */
+.lc-container{
+  display: flex;
+  justify-content: center;
+}
+
+.lc-text__style{
+  width: 50%;
+  padding: 3% 0;
+  text-align: center;
+}
+
+
+/* MODAL STYLE  ################################ */
+
+.modal-container{
+  display: none;
+  position: fixed; 
+  padding: 50px 0;
+  left: 0; 
+  top: 0;
+  width: 100%;
+  height: 100%; 
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-input{
+  background-color: white;
+  border-radius: 5px;
+  margin: 1% 2%;
+  display: flex;
+  padding: 2%;
+  flex-direction: column;
+}
+
+.close-modal__style{
+  width: 30px;
+  height: 30px;
+  background-color:#F37335;
+  color: black;
+  border: none;
+  font-size: 25px;
+}
+
+.btn-modal__style{
+  padding: 0.7em;
+  font-size: 1em;
+  margin: 2px 2px;
+  background-color:#F37335;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  color: white;
+  width: 50%;
+}
+
 
 
 /* INICIO DE MEDIA QUERYS  */

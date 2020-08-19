@@ -1,4 +1,4 @@
-import {createUserEmailAndPassword, registerGoogle, logOutAccount, changeState} from "./firebasefunction.js"
+import {createUserEmailAndPassword, registerGoogle} from "./firebasefunction.js"
 
 export default () =>{
     
@@ -12,7 +12,6 @@ export default () =>{
     const msjVerification= document.querySelector('#verification-password');
     const registerWithGoogle = document.querySelector('.btn-signin-google');
 
-
     //Verificacion de contraseña
     passwordValidation.addEventListener('blur', verification);
     function verification(){
@@ -25,7 +24,7 @@ export default () =>{
             msjVerification.textContent = "Password must contain at least 6 characters, one number and one letter in uppercase.";
         }
         else{
-        msjVerifcatiogn.classList.add('hide');
+        msjVerification.classList.add('hide');
         }
     };
 
@@ -34,10 +33,23 @@ export default () =>{
         e.preventDefault();
         const email = document.querySelector(".email-signup").value;
         const password = document.querySelector(".password-signup").value;
-        const signUp = await createUserEmailAndPassword(email,password);
-        //changeState(signUp)
+        const nameForm = document.querySelector('.name-signup').value;
+        console.log(nameForm);
         
+        const signUp = await createUserEmailAndPassword(email,password);
         msjEmailVer.innerHTML = signUp;
+
+        var user = firebase.auth().currentUser; //null u objeto
+        console.log(user);           //null u name
+        console.log(nameForm);
+        if (user != null) {
+            db.collection('users').doc(user.uid).set({
+                name: nameForm,
+                email:user.email,
+                photoURL:user.photoURL,
+                uid: user.uid,
+            });
+        };
     });
     
     //SignIn with google 
@@ -46,29 +58,36 @@ export default () =>{
         signupForm.reset();
         const provider = new firebase.auth.GoogleAuthProvider();
         const signinGoogle = await registerGoogle(provider);
+        
+        var user = firebase.auth().currentUser; //null u objeto
+        console.log(user);           //null u name
+        
+        if (user != null) {
+            db.collection('users').doc(user.uid).set({
+                name: user.displayName,
+                email:user.email,
+                photoURL:user.photoURL,
+                uid: user.uid,
+            });
+        };
         //changeState(signinGoogle)
     });
 
-    //Entramos en timeline
-    changeState()
-
-/*     firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            window.location.hash = 'timeline';
-            console.log(user.displayName);
-            console.log(user);
-        } else {
-            console.log("nope");
-        }
-    }); */
-
-        //Changing page to signIn
-        const signinFromSignup= document.querySelector('.signin-view');
-        signinFromSignup.addEventListener('click',() => {
-            window.location.hash = 'signin';
-        });
-
-    //logOutAccount();
+    //Entramos a timeline
+    let current = firebase.auth().currentUser;
+    if (current !== null) {
+        window.location.hash = 'timeline';
+        console.log(user.displayName);
+        console.log(user);
+    } else {
+        console.log("nope");
+    } 
+    
+    //Changing page to signIn
+    const signinFromSignup= document.querySelector('.signin-view');
+    signinFromSignup.addEventListener('click',() => {
+        window.location.hash = 'signin';
+    });
 
 };
 
